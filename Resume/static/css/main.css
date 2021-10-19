@@ -1,0 +1,24 @@
+#Main{
+    background-color: whitesmoke;
+    color: black;
+    margin-left: auto;
+    margin-right: auto;
+    font-family: "Open Sans", sans-serif;
+    color: #272829;
+}
+#Main h1{
+    font-family: "Raleway", sans-serif;
+    color: #37b3ed;
+}
+
+#profile-wrapper{
+    text-align: center;
+}
+
+#profile-pic{
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    margin-left: auto;
+    margin-right: auto;
+}
