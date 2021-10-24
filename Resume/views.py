@@ -1,22 +1,23 @@
 from django.http.response import HttpResponseRedirect
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from .models import Message
 from .forms import MessageForm
-from django.http import HttpResponseRedirect
+from django.contrib import messages
+
+#from django.contrib.auth.forms import UserCreationForm #first to import for creating a new form
+
+
 # Create your views here.
 
 def home(request):
-    submitted = False
+    form = MessageForm()
     if request.method == 'POST':
-        form = MessageForm(request.POST)
+        form = MessageForm(request.POST or None)
         if form.is_valid():
             form.save()
-            return HttpResponseRedirect('/')
+        messages.success(request, ('Your Message Has Been Sent Successfully!'))
+        return redirect('/')
+
     else:
-        form = MessageForm
-        if 'submitted' in request.GET:
-           submitted = True 
-    return render(request, 'Resume/home.html', {'form':form, 'submitted':submitted})
-
-
-
+        context = {}
+        return render(request, 'Resume/home.html', context)

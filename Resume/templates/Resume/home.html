@@ -13,10 +13,22 @@
 
 </head>
 <body>
+
     <br>
     <div class="conatiner" id="Main">
         <div class="row" id="row-wrapper">
             <div class="col-md-3">
+
+                {% if messages %}
+                    {% for message in messages %}
+                    <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                        {{ message }}
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    {% endfor %}
+                {% endif %}
                 <div class="card card-body" id="profile-wrappper">
                     <img id="profile-pic" src="{% static 'images/jubril.jpg' %}" alt="">
                     <hr>
@@ -190,31 +202,25 @@
         <div class="col-md-6">
             <div class="card card-body">
                 {% block content %}
-                <center>
                 <h1>Send Us A Message</h1>
-                <hr>
-                <br>
-                <br>
-                {% if submitted %}
-                     Your Message Was Sent Successfully !!!
+                <form action="" method="POST">
+                    {% csrf_token %}
+                    <div class="form-group">
+                        <input type="text" class="form-control" aria-describedby="emailHelp" placeholder="Name" name="name">
+                    </div>
 
-                {% else %}
+                    <div class="form-group">
+                        <input type="email" class="form-control" aria-describedby="emailHelp" placeholder="Email" name="email">
+                    </div>
 
-                    <form action="" method="POST">
-                        {{ csrf_token }}
+                    <div class="form-group">
+                        <input type="text" class="form-control" aria-describedby="emailHelp" placeholder="Message" name="message">
+                    </div>
 
-                        {{ form.as_p }}
-
-                        <input type="submit" value="Send Message" class="btn btn-info">
-                    </form>
-                {% endif %}
-                </center>
+                    <input type="submit" name="Submit">
+                </form>
                 {% endblock %}
                 <hr>
-                <br>
-                <br>
-                <br>
-                <br>
                 <center>
                 <footer id="footer">
                     <div class="container">
